@@ -21,11 +21,9 @@ const Footer = () => {
             >
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
             </svg>
-            <span className="ml-3 text-xl">Tailblocks</span>
+            <span className="ml-3 text-xl">LLWWM</span>
           </a>
-          <p className="mt-2 text-sm text-gray-500">
-            Air plant banjo lyft occupy retro adaptogen indego
-          </p>
+          <p className="mt-2 text-sm text-gray-500"></p>
         </div>
         <div className="flex-grow flex flex-wrap md:pr-20 -mb-10 md:text-left text-center order-first">
           <div className="lg:w-1/4 md:w-1/2 w-full px-4">
@@ -143,12 +141,12 @@ const Footer = () => {
           <p className="text-gray-400 text-sm text-center sm:text-left">
             © 2022 LLWWM —
             <a
-              href="https://twitter.com/knyttneve"
+              href="https://twitter.com/"
               className="text-gray-500 ml-1"
               rel="noopener noreferrer"
               target="_blank"
             >
-              @mucahit-sahin
+              Twitter
             </a>
           </p>
           <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">

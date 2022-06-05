@@ -131,7 +131,7 @@ const Watch = () => {
       {!isStart && (
         <div className="fixed left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2  p-2 flex flex-col bg-neutral-700 rounded">
           <div className="flex flex-row items-center">
-            <span className="text-white">Video File:</span>
+            <span className="text-white mr-3">Video File:</span>
             <input
               id="film"
               type="file"
