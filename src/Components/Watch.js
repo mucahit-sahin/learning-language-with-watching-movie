@@ -136,6 +136,7 @@ const Watch = () => {
               id="film"
               type="file"
               className="hidden"
+              accept="video/*,.mkv"
               onChange={(e) => {
                 setVideoFilePath(URL.createObjectURL(e.target.files[0]));
               }}
@@ -155,15 +156,18 @@ const Watch = () => {
               id="subtitle"
               type="file"
               name="subtitle"
+              accept=".srt"
               onChange={loadOriginalSubtitle}
             />
           </div>
           <div className="flex flex-col py-1 ">
             <span className="text-white py-1">Native Subtitle:</span>
+            {/* accept srt file */}
             <input
               id="subtitle"
               type="file"
               name="subtitle"
+              accept=".srt"
               onChange={loadTranslatedSubtitle}
             />
           </div>
