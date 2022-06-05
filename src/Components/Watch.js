@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ReactPlayer from "react-player";
 import VideoUI from "./VideoUI";
 
 const Watch = () => {
@@ -7,6 +8,7 @@ const Watch = () => {
   const [isStart, setIsStart] = useState(false);
   const [volume, setVolume] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [played, setPlayed] = useState(0);
 
   const [videoFilePath, setVideoFilePath] = useState(null);
   const [subtitle, setSubtitle] = useState(null);
@@ -38,9 +40,10 @@ const Watch = () => {
       // let text = deleteLines(content, 3);
       content = cleanContent(content);
       // … do something with the 'content' …
+      console.log(content);
       setSubtitle2(content);
     };
-    fileReader.readAsText(file[0]);
+    fileReader.readAsText(file[0], "ISO-8859-9");
   };
   const cleanContent = (string) => {
     string = string.replace(/^\s*[\r\n]/gm, "");
@@ -97,7 +100,8 @@ const Watch = () => {
     });
   };
   const onTimeUpdate = (e) => {
-    let currentTime = document.querySelector("video").currentTime;
+    let currentTime = e.target.currentTime;
+    setPlayed(currentTime);
     let currentSubtitle = subtitle.filter(
       (item) => item.start <= currentTime && item.end >= currentTime
     );
@@ -181,13 +185,21 @@ const Watch = () => {
       )}
       {isStart && (
         <>
-          <video
+          <ReactPlayer
             ref={playerRef}
-            src={videoFilePath}
+            url={videoFilePath}
             className="absolute top-0 left-0 z-10 w-full h-full"
             width="100%"
             height="100%"
-            onTimeUpdate={onTimeUpdate}
+            config={{
+              file: {
+                attributes: {
+                  onTimeUpdate: (a) => {
+                    onTimeUpdate(a);
+                  },
+                },
+              },
+            }}
           />
 
           <VideoUI
@@ -201,6 +213,7 @@ const Watch = () => {
             playedSubtitleText2={playedSubtitleText2}
             selectWord={selectWord}
             setSelectWord={setSelectWord}
+            played={played}
           />
         </>
       )}

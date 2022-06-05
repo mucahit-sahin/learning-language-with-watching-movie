@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import screenfull from "screenfull";
 import WordCard from "./WordCard";
 
@@ -14,6 +14,7 @@ const VideoUI = ({
   playedSubtitleText2,
   selectWord,
   setSelectWord,
+  played,
 }) => {
   const [soundIcon, setSoundIcon] = React.useState(
     "url(https://img.icons8.com/flat-round/344/high-volume--v1.png)"
@@ -48,6 +49,20 @@ const VideoUI = ({
     screenfull.toggle(playerContainerRef.current);
   };
 
+  const formatTime = (time) => {
+    // Hours, minutes and seconds
+    const hrs = Math.floor(time / 3600);
+    const mins = Math.floor((time % 3600) / 60);
+    const secs = Math.floor(time % 60);
+    if (hrs > 0) {
+      return `${hrs}:${mins < 10 ? "0" : ""}${mins}:${
+        secs < 10 ? "0" : ""
+      }${secs}`;
+    } else {
+      return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
+    }
+  };
+
   return (
     <div className="fixed left-0 bottom-0 w-screen z-50 p-4 bg-transparent flex flex-col">
       <div className="flex flex-row justify-between">
@@ -60,34 +75,40 @@ const VideoUI = ({
             {playedSubtitleText}
           </div>
           <div
-            className={` flex flex-row text-gray-500 font-semibold ${fontSize}`}
+            className={`flex flex-row text-gray-500 font-semibold ${fontSize}`}
           >
             {playedSubtitleText2}
           </div>
         </div>
-
         {selectWord && (
           <WordCard word={selectWord} setSelectWord={setSelectWord} />
         )}
       </div>
-      <div className="flex flex-row justify-between">
-        {/* video seek bar */}
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={
-            playerRef.current
-              ? (playerRef.current.currentTime * 100) /
-                playerRef.current.duration
-              : 0
-          }
-          onChange={(e) => {
-            playerRef.current.currentTime =
-              (e.target.value * playerRef.current.duration) / 100;
-          }}
-          className="w-full h-full"
-        />
+      <div className="flex flex-col">
+        <div className="flex flex-row justify-between">
+          {/* video seek bar */}
+          <input
+            type="range"
+            min="0"
+            max={playerRef.current && playerRef.current.getDuration()}
+            value={document.querySelector("video") ? played : 0}
+            onChange={(e) => playerRef.current.seekTo(e.target.value)}
+            className="w-full h-full"
+          />
+        </div>
+        <div className="flex flex-row justify-between">
+          {/* played duration (hh:mm:ss)*/}
+          <span className="text-white text-sm font-bold">
+            {document.querySelector("video") ? formatTime(played) : "00:00:00"}
+          </span>
+
+          {/* video duration (hh:mm:ss)*/}
+          <span className="ml-auto text-white text-sm font-bold">
+            {document.querySelector("video")
+              ? formatTime(document.querySelector("video").duration)
+              : "00:00:00"}
+          </span>
+        </div>
       </div>
       <div className="flex flex-row items-center">
         {/* play button */}
@@ -167,7 +188,7 @@ const VideoUI = ({
                   {fontSize === "text-2xl" && (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6"
+                      className="h-6 w-6"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -194,7 +215,7 @@ const VideoUI = ({
                   {fontSize === "text-3xl" && (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6"
+                      className="h-6 w-6"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -221,7 +242,7 @@ const VideoUI = ({
                   {fontSize === "text-4xl" && (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6"
+                      className="h-6 w-6"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"

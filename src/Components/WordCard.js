@@ -50,7 +50,6 @@ const WordCard = ({ word, setSelectWord }) => {
         to: userLang,
       })
       .then((response) => {
-        console.log(response.data);
         setResponse(response.data);
         setExamples({
           source: response.data.contextResults.results[0].sourceExamples,
