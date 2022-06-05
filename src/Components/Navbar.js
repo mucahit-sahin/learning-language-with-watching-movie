@@ -24,7 +24,11 @@ const Navbar = () => {
           </svg>
           <span className="ml-3 text-xl">LLWWM</span>
         </a>
-        <nav className="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-700	flex flex-wrap items-center text-base justify-center"></nav>
+        <nav className="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-700	flex flex-wrap items-center text-base justify-center">
+          <a href="#steps" className="mr-5 hover:text-gray-300">
+            Steps
+          </a>
+        </nav>
         <button
           className="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0"
           onClick={() => navigate("/watch")}

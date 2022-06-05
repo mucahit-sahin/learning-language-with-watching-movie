@@ -3,7 +3,7 @@ import heroImg from "../images/hero.png";
 
 const Steps = () => {
   return (
-    <section className="text-gray-600 body-font bg-gray-900">
+    <section id="steps" className="text-gray-600 body-font bg-gray-900">
       <div className="container px-5 py-24 mx-auto flex flex-wrap">
         <div className="flex flex-wrap w-full">
           <div className="lg:w-2/5 md:w-1/2 md:pr-10 md:py-6">
