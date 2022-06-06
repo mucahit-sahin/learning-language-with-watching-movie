@@ -67,7 +67,7 @@ const WordCard = ({ word, setSelectWord }) => {
     return;
   }
   return (
-    <div className="fixed right-3 top-10 z-30 flex flex-col bg-gray-900 shadow shadow-gray-400 p-2 w-80 rounded">
+    <div className="absolute right-3  bottom-10 z-30 flex flex-col bg-gray-900 shadow shadow-gray-400 p-2 w-80 rounded">
       {loading ? (
         <div className="text-center">
           <span className="text-white">Loading...</span>

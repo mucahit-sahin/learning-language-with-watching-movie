@@ -123,104 +123,114 @@ const Watch = () => {
   const translateWord = (word) => {
     setSelectWord(word.target.innerText);
   };
+  /*
+  if (isStart) {
+    setInterval(() => {
+      document.querySelector("#video-container").style.width =
+        "calc(100% - 200px)";
+    }, 1000);
+  }*/
   return (
-    <div
-      ref={playerContainerRef}
-      className="container text-gray-400 bg-gray-900 body-font h-screen w-screen"
-    >
-      {!isStart && (
-        <div className="fixed left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2  p-2 flex flex-col bg-neutral-700 rounded">
-          <div className="flex flex-row items-center">
-            <span className="text-white mr-3">Video File:</span>
-            <input
-              id="film"
-              type="file"
-              className="hidden"
-              accept="video/*,.mkv"
-              onChange={(e) => {
-                setVideoFilePath(URL.createObjectURL(e.target.files[0]));
-              }}
-            />
-            <button
-              className="w-full px-4 py-1 text-white transition-colors duration-200 transform bg-blue-600 rounded-md focus:outline-none sm:w-auto sm:mx-1 hover:bg-blue-500 focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-40 font-semibold"
-              onClick={() => {
-                document.querySelector("#film").click();
-              }}
-            >
-              Select Video
-            </button>
+    <div className="h-screen w-screen">
+      <div
+        id="video-container"
+        ref={playerContainerRef}
+        className="container relative text-gray-400 bg-gray-900 body-font h-screen w-screen"
+      >
+        {!isStart && (
+          <div className="fixed left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2  p-2 flex flex-col bg-neutral-700 rounded">
+            <div className="flex flex-row items-center">
+              <span className="text-white mr-3">Video File:</span>
+              <input
+                id="film"
+                type="file"
+                className="hidden"
+                accept="video/*,.mkv"
+                onChange={(e) => {
+                  setVideoFilePath(URL.createObjectURL(e.target.files[0]));
+                }}
+              />
+              <button
+                className="w-full px-4 py-1 text-white transition-colors duration-200 transform bg-blue-600 rounded-md focus:outline-none sm:w-auto sm:mx-1 hover:bg-blue-500 focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-40 font-semibold"
+                onClick={() => {
+                  document.querySelector("#film").click();
+                }}
+              >
+                Select Video
+              </button>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-white py-1">Original Subtitle:</span>
+              <input
+                id="subtitle"
+                type="file"
+                name="subtitle"
+                accept=".srt"
+                onChange={loadOriginalSubtitle}
+              />
+            </div>
+            <div className="flex flex-col py-1 ">
+              <span className="text-white py-1">Native Subtitle:</span>
+              {/* accept srt file */}
+              <input
+                id="subtitle"
+                type="file"
+                name="subtitle"
+                accept=".srt"
+                onChange={loadTranslatedSubtitle}
+              />
+            </div>
+            <div className="flex flex-col py-1">
+              <button
+                className="w-full px-4 py-1 text-white transition-colors duration-200 transform bg-blue-600 rounded-md focus:outline-none sm:w-auto sm:mx-1 hover:bg-blue-500 focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-40 font-semibold"
+                onClick={() => {
+                  if (videoFilePath && subtitle && subtitle2) {
+                    setIsStart(true);
+                  } else {
+                    alert("Please select all files");
+                  }
+                }}
+              >
+                Start
+              </button>
+            </div>
           </div>
-          <div className="flex flex-col">
-            <span className="text-white py-1">Original Subtitle:</span>
-            <input
-              id="subtitle"
-              type="file"
-              name="subtitle"
-              accept=".srt"
-              onChange={loadOriginalSubtitle}
-            />
-          </div>
-          <div className="flex flex-col py-1 ">
-            <span className="text-white py-1">Native Subtitle:</span>
-            {/* accept srt file */}
-            <input
-              id="subtitle"
-              type="file"
-              name="subtitle"
-              accept=".srt"
-              onChange={loadTranslatedSubtitle}
-            />
-          </div>
-          <div className="flex flex-col py-1">
-            <button
-              className="w-full px-4 py-1 text-white transition-colors duration-200 transform bg-blue-600 rounded-md focus:outline-none sm:w-auto sm:mx-1 hover:bg-blue-500 focus:bg-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-40 font-semibold"
-              onClick={() => {
-                if (videoFilePath && subtitle && subtitle2) {
-                  setIsStart(true);
-                } else {
-                  alert("Please select all files");
-                }
-              }}
-            >
-              Start
-            </button>
-          </div>
-        </div>
-      )}
-      {isStart && (
-        <>
-          <ReactPlayer
-            ref={playerRef}
-            url={videoFilePath}
-            className="absolute top-0 left-0 z-10 w-full h-full"
-            width="100%"
-            height="100%"
-            config={{
-              file: {
-                attributes: {
-                  onTimeUpdate: (a) => {
-                    onTimeUpdate(a);
+        )}
+        {isStart && (
+          <>
+            <ReactPlayer
+              ref={playerRef}
+              url={videoFilePath}
+              className="absolute top-0 left-0 z-10 w-full h-full transition-all"
+              width="100%"
+              height="100%"
+              config={{
+                file: {
+                  attributes: {
+                    onTimeUpdate: (a) => {
+                      onTimeUpdate(a);
+                    },
                   },
                 },
-              },
-            }}
-          />
+              }}
+            />
 
-          <VideoUI
-            setIsPlaying={setIsPlaying}
-            isPlaying={isPlaying}
-            playerContainerRef={playerContainerRef}
-            playerRef={playerRef}
-            setVolume={setVolume}
-            volume={volume}
-            playedSubtitleText={playedSubtitleText}
-            playedSubtitleText2={playedSubtitleText2}
-            selectWord={selectWord}
-            setSelectWord={setSelectWord}
-            played={played}
-          />
-        </>
-      )}
+            <VideoUI
+              setIsPlaying={setIsPlaying}
+              isPlaying={isPlaying}
+              playerContainerRef={playerContainerRef}
+              playerRef={playerRef}
+              setVolume={setVolume}
+              volume={volume}
+              playedSubtitleText={playedSubtitleText}
+              playedSubtitleText2={playedSubtitleText2}
+              selectWord={selectWord}
+              setSelectWord={setSelectWord}
+              played={played}
+            />
+          </>
+        )}
+      </div>
     </div>
   );
 };

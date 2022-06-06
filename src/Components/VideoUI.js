@@ -64,7 +64,10 @@ const VideoUI = ({
   };
 
   return (
-    <div className="fixed left-0 bottom-0 w-screen z-50 p-4 bg-transparent flex flex-col">
+    <div
+      id="video-ui"
+      className="absolute left-0 bottom-0 w-full z-50 p-4 bg-transparent flex flex-col"
+    >
       <div className="flex flex-row justify-between">
         {/* subtitle */}
 
