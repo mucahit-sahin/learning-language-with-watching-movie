@@ -40,7 +40,7 @@ const WordCard = ({ word, setSelectWord }) => {
       .post(`https://api.reverso.net/translate/v1/translation`, {
         format: "text",
         from: "eng",
-        input: word.replace(/[.?!]/g, ""),
+        input: word?.replace(/[.?!]/g, ""),
         options: {
           sentenceSplitter: true,
           origin: "translation.web",
@@ -63,11 +63,9 @@ const WordCard = ({ word, setSelectWord }) => {
       });
   }, [word, userLang]);
 
-  if (!response) {
-    return;
-  }
+  if (!word) return;
   return (
-    <div className="absolute right-3  bottom-10 z-30 flex flex-col bg-gray-900 shadow shadow-gray-400 p-2 w-80 rounded">
+    <div className="fixed left-3  top-10 z-30 flex flex-col bg-gray-900 shadow shadow-gray-400 p-2 w-80 rounded">
       {loading ? (
         <div className="text-center">
           <span className="text-white">Loading...</span>
@@ -76,10 +74,10 @@ const WordCard = ({ word, setSelectWord }) => {
         <div className="flex flex-col">
           <div className="flex flex-col items-center justify-center p-2">
             <span className="text-green-800 font-extrabold">
-              {response.input[0]}
+              {response?.input[0]}
             </span>
             <span className=" text-white font-bold">
-              {response.translation}
+              {response?.translation}
             </span>
             <span
               className="text-gray-600 rounded-full font-bold absolute -right-1 -top-1 bg-white p-1"

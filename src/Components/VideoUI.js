@@ -35,13 +35,6 @@ const VideoUI = ({
   };
 
   const handlePlayPause = () => {
-    if (isPlaying) {
-      console.log("pause");
-      document.querySelector("video").pause();
-    } else {
-      console.log("play");
-      document.querySelector("video").play();
-    }
     setIsPlaying(!isPlaying);
   };
 
@@ -83,9 +76,6 @@ const VideoUI = ({
             {playedSubtitleText2}
           </div>
         </div>
-        {selectWord && (
-          <WordCard word={selectWord} setSelectWord={setSelectWord} />
-        )}
       </div>
       <div className="flex flex-col">
         <div className="flex flex-row justify-between">
@@ -264,6 +254,9 @@ const VideoUI = ({
           </div>
         </div>
       )}
+      {/* word card modal */}
+
+      <WordCard word={selectWord} setSelectWord={setSelectWord} />
     </div>
   );
 };

@@ -131,11 +131,12 @@ const Watch = () => {
     }, 1000);
   }*/
   return (
-    <div className="h-screen w-screen">
+    <div className="h-screen w-screen flex flex-row">
       <div
         id="video-container"
         ref={playerContainerRef}
-        className="container relative text-gray-400 bg-gray-900 body-font h-screen w-screen"
+        className="container relative text-gray-400 bg-gray-900 body-font h-screen"
+        style={{ width: "calc(100vm - 200px)" }}
       >
         {!isStart && (
           <div className="fixed left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2  p-2 flex flex-col bg-neutral-700 rounded">
@@ -204,6 +205,7 @@ const Watch = () => {
               className="absolute top-0 left-0 z-10 w-full h-full transition-all"
               width="100%"
               height="100%"
+              playing={isPlaying}
               config={{
                 file: {
                   attributes: {
@@ -230,6 +232,16 @@ const Watch = () => {
             />
           </>
         )}
+      </div>
+      <div style={{ width: "200px" }}>
+        <ins
+          class="adsbygoogle"
+          style={{ display: "block" }}
+          data-ad-format="autorelaxed"
+          data-ad-client="ca-pub-6821390482298484"
+          data-ad-slot="6363246062"
+        ></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       </div>
     </div>
   );
