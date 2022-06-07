@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import VideoUI from "./VideoUI";
 
@@ -123,20 +123,16 @@ const Watch = () => {
   const translateWord = (word) => {
     setSelectWord(word.target.innerText);
   };
-  /*
-  if (isStart) {
-    setInterval(() => {
-      document.querySelector("#video-container").style.width =
-        "calc(100% - 200px)";
-    }, 1000);
-  }*/
+  useEffect(() => {
+    (window.adsbygoogle = window.adsbygoogle || []).push({});
+  }, []);
   return (
     <div className="h-screen w-screen flex flex-row">
       <div
         id="video-container"
         ref={playerContainerRef}
         className="container relative text-gray-400 bg-gray-900 body-font h-screen"
-        style={{ width: "calc(100vm - 200px)" }}
+        style={{ width: "calc(100vm - 300px)" }}
       >
         {!isStart && (
           <div className="fixed left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2  p-2 flex flex-col bg-neutral-700 rounded">
@@ -233,7 +229,7 @@ const Watch = () => {
           </>
         )}
       </div>
-      <div style={{ width: "200px" }}>
+      <div style={{ width: "300px" }}>
         <ins
           class="adsbygoogle"
           style={{ display: "block" }}
@@ -241,7 +237,6 @@ const Watch = () => {
           data-ad-client="ca-pub-6821390482298484"
           data-ad-slot="6363246062"
         ></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       </div>
     </div>
   );
