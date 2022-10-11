@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Learning language with watching movie
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+LLWWM is a powerful toolbox for learning languages. It helps you to discover, understand, and learn from native materials. Studying will become more effective, interesting, and enjoyable!
+
+## [Demo](https://www.learnlanguage.tk/)
 
 ## Available Scripts
 
